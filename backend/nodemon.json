@@ -1,0 +1,7 @@
+{
+    "watch": ["src/**/*.ts"],  
+    "ext": ".js, .ts",
+    "script": "npx tsc",  
+    "ignore": ["node_modules/**"]
+  }
+  
