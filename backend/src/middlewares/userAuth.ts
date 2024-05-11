@@ -8,17 +8,15 @@ export function userAuth(req: any, res: any, next: any) {
                 details: 'Invalid Bearer token'
             });
         }
-        console.log(jwt);
-        
+
         let token: string = authHeader.split(' ')[1];
         let secretKey: string = process.env.SECRET_KEY as string;
         let decoded:any = jwt.verify(token, secretKey);
-        if (!decoded.isAdmin) {
-            req.userId = decoded.userId;
-            req.email = decoded.email;
+        if (decoded) {
+            req.userId = decoded.email;
             next();
         } else {
-            return res.json({details: "Invalid User"});
+            res.json({ details: 'Invalid Bearer token' });
         }
         
     } catch (err) {
