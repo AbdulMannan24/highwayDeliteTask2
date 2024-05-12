@@ -1,12 +1,22 @@
+import { useNavigate } from "react-router-dom";
+
+
 function Note({ NoteId, title, content}) {
+    const navigate = useNavigate();
+
+    function handleView() {
+        console.log(title);
+        navigate('/view/' + title);
+    }    
     return (
         <div>
             <h3>{title}</h3>
-            <br />
             <p>{content}</p>
-            <button id= {NoteId}>view</button>
-            <button id= {NoteId}>Edit</button>
+            <button id= {title} onClick = {handleView}>view</button>
+            <button id= {title}>Edit</button>
             <button id = {NoteId}>Delete</button>
         </div>
     )
 }
+
+export default Note;
