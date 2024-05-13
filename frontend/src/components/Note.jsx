@@ -8,8 +8,7 @@ function Note({ NoteId, title, content, onDelete}) {
     const navigate = useNavigate();
 
     function handleView() {
-        console.log(title);
-        navigate('/view/' + title);
+        navigate('/view/' + NoteId);
     }    
 
     function handleEdit() {
