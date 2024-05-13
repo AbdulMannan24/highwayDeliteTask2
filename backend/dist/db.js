@@ -11,15 +11,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = exports.db = void 0;
 const pg_1 = require("pg");
+// export const db = new Client({
+//   user: 'ma24042000',
+//   password: process.env.POSTGRESQL_PASS,
+//   host: 'ep-winter-thunder-17348528.us-east-2.aws.neon.tech',
+//   database: 'NotesDB',
+//   port: 5432, 
+//   ssl: {
+//     rejectUnauthorized: true 
+//   }
+// });
 exports.db = new pg_1.Client({
-    user: 'ma24042000',
-    password: process.env.POSTGRESQL_PASS,
-    host: 'ep-winter-thunder-17348528.us-east-2.aws.neon.tech',
-    database: 'NotesDB',
-    port: 5432,
-    ssl: {
-        rejectUnauthorized: true
-    }
+    "user": "postgresdb_nq1x_user",
+    "password": "5mtOnpzd7djNKlfCrcoUmhBScklGThwG",
+    "host": "dpg-cneltb8l6cac73cobrpg-a.oregon-postgres.render.com",
+    "port": 5432, // Assuming default port
+    "database": "postgresdb_nq1x",
+    "ssl": true
 });
 function connectDB() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -28,7 +36,7 @@ function connectDB() {
             console.log('Connected to PostgreSQL database');
         }
         catch (error) {
-            console.error('Error connecting to PostgreSQL:', error);
+            console.log('Error connecting to PostgreSQL:', error);
         }
     });
 }

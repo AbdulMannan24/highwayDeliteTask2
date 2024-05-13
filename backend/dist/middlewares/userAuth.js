@@ -33,17 +33,15 @@ function userAuth(req, res, next) {
                 details: 'Invalid Bearer token'
             });
         }
-        console.log(jwt);
         let token = authHeader.split(' ')[1];
         let secretKey = process.env.SECRET_KEY;
         let decoded = jwt.verify(token, secretKey);
-        if (!decoded.isAdmin) {
-            req.userId = decoded.userId;
-            req.email = decoded.email;
+        if (decoded) {
+            req.userId = decoded.email;
             next();
         }
         else {
-            return res.json({ details: "Invalid User" });
+            res.json({ details: 'Invalid Bearer token' });
         }
     }
     catch (err) {

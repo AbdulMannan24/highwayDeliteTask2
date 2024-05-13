@@ -43,15 +43,21 @@ const db_1 = require("./db");
 const app = (0, express_1.default)();
 // middlewares
 app.use((0, cors_1.default)());
+app.use(express_1.default.json());
 // routes
 const user_1 = __importDefault(require("./routes/user"));
 app.use('/user', user_1.default);
+const notes_1 = __importDefault(require("./routes/notes"));
+app.use('/notes', notes_1.default);
 app.get('/', (req, res) => {
     res.json({ message: "this is working" });
 });
 app.listen(3000, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log('listening on port 3000');
-    yield (0, db_1.connectDB)();
-    // await db.query('create table users (email varchar(50) UNIQUE NOT NULL, name varchar(20) NOT NULL, phone varchar(10) NOT NULL, status smallint default 0)');
-    // await db.query("INSERT INTO users (email, name, phone) VALUES('test@gmail.com', 'test','9876543212')");
+    try {
+        yield (0, db_1.connectDB)();
+    }
+    catch (err) {
+        console.log(err);
+    }
 }));
