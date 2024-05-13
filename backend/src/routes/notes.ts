@@ -21,7 +21,7 @@ router.get('/:search?', userAuth, async (req: any , res: any) => {
             search = '%' + search + '%';
             let sqlQeuery = `SELECT * FROM notes 
                              WHERE userId = $1 AND 
-                             title ILIKE lower($2) ESCAPE ''`
+                             title ILIKE $2 ESCAPE ''`
             let result = await db.query(sqlQeuery, [user, search]);
             console.log(result.rows);
             if(result.rows.length > 0) {
