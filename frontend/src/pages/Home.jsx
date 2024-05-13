@@ -17,6 +17,10 @@ function Home() {
         }
     }
 
+    function handleDeleteNote (id)  {
+        setNotes(notes.filter((note) => note.id !== id));
+    };
+
     useEffect(()=>{
         getNotes();
     }, [search])
@@ -33,7 +37,8 @@ function Home() {
             {notes.map(note => <Note key = {note.id} 
                                      NoteId = {note.id} 
                                      title = {note.title}
-                                     content = {note.content}/>)}
+                                     content = {note.content}
+                                     onDelete = {handleDeleteNote}/>)}
         </div>
     )
 }

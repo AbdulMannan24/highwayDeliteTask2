@@ -1,6 +1,7 @@
 import express from 'express';
 import { db } from '../db';
 import { userAuth } from '../middlewares/userAuth';
+import { noteBody } from '../types';
 const router = express.Router();
 
 // read notes as per search param, if empty returns all notes for the user
@@ -38,7 +39,7 @@ router.get('/:search?', userAuth, async (req: any , res: any) => {
 })
 
 // get by ID
-router.get('/edit/:id', userAuth, async (req: any, res: any) => {
+router.get('/search/:id', userAuth, async (req: any, res: any) => {
     try {
         let user = req.userId;
         if (req.params.id == null || req.params.id === undefined) {
@@ -62,9 +63,16 @@ router.get('/edit/:id', userAuth, async (req: any, res: any) => {
 
 router.post('/add', userAuth, async (req: any, res: any) => {
     try {
-        let user = req.userId;
+        const {success} = noteBody.safeParse(req.body);
+        if (!success) {
+            res.json({details:"Title and content should have min length of 1"});
+            return;
+        }
+        let user: string = req.userId as string;
+        let title: string = req.body.title as string;
+        let content: string = req.body.content as string;
         let result = await db.query(`INSERT INTO notes (title, content, userId)
-                                     VALUES($1, $2, $3)`, [req.body.title, req.body.content, user]);
+                                     VALUES($1, $2, $3)`, [title, content, user]);
         if (result.rowCount as number > 0) {
             res.json({message: 'success'});
         } else {
@@ -79,10 +87,11 @@ router.post('/add', userAuth, async (req: any, res: any) => {
 
 router.put('/edit', userAuth, async (req: any, res: any) => {
     try {
+        console.log(req.body);
         let id:number = req.body.id;
-        let content: string = req.body.note;
+        let content: string = req.body.content;
         let title: string = req.body.title;
-        let result = await db.query(`UPDATE notes SET title = ${title}, content = ${content} WHERE id = ${id}`);
+        let result = await db.query(`UPDATE notes SET title = $1, content = $2 WHERE id = $3`, [title, content, id]);
         if (result.rowCount as number > 0) {
             res.json({message: 'success'});
         } else {
@@ -95,18 +104,21 @@ router.put('/edit', userAuth, async (req: any, res: any) => {
 })
 
 
-router.put('/edit', userAuth, async (req: any, res: any) => {
+router.delete('/delete/:id', userAuth, async (req: any, res: any) => {
     try {
-        let id:number = req.body.id;
+        let id:number = req.params.id;
+        if (id == null || id == undefined) {
+            return res.json({details: "Invalid Note Id"});
+        }
         let result = await db.query(`DELETE FROM notes WHERE id = ${id}`);
         if (result.rowCount as number > 0) {
             res.json({message: 'success'});
         } else {
-            res.json( {details: "Failed to ADD Note"});
+            res.json( {details: "Failed to Delete Note"});
         } 
     } catch (err) {
         console.log(err);
-        res.json({details: "Failed to Edit Note"});
+        res.json({details: "Failed to Delete Note"});
     }
 })
 
