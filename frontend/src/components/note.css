@@ -1,0 +1,49 @@
+.note-card {
+    background-color: white; 
+    color: black; 
+    padding: 15px; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+
+    width: 300px; 
+    margin-bottom: 15px; 
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  .note-card {
+    /* Existing styles... */
+    transition: all 0.2s ease-in-out; /* Add transition for hover effect */
+  }
+  
+  .note-card:hover {
+   
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+    transform: translateY(-2px); 
+  }
+  .note-content {
+    margin-bottom: 10px; 
+  }
+  
+  .buttons-container {
+    display: flex; 
+    justify-content: end; 
+  }
+  
+  .buttons-container button {
+    margin: 2px;
+    color: inherit; 
+    cursor: pointer; 
+  }
+  
+  .buttons-container button:hover {
+    opacity: 0.8; 
+  }
+  
+  .buttons-container button img {
+    width: 20px; 
+    height: 20px; 
+  }
+  
+.black {
+    background-color: black;
+}

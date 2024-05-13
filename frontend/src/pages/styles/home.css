@@ -1,0 +1,18 @@
+.note-cards-container {
+    display: flex; 
+    flex-wrap: wrap; 
+}
+  
+@media (max-width: 768px) { 
+    .note-cards-container {
+      justify-content: center; 
+    }
+}
+
+.searchDiv {
+    display: flex;
+    justify-content: space-between;
+}
+.searchBar {
+    width: 50%;
+}

@@ -20,9 +20,9 @@ router.get('/:search?', userAuth, async (req: any , res: any) => {
         } else {
             search = '%' + search + '%';
             let sqlQeuery = `SELECT * FROM notes 
-                             WHERE userId = '${user}' AND 
-                             title LIKE lower('${search}') ESCAPE ''`
-            let result = await db.query(sqlQeuery);
+                             WHERE userId = $1 AND 
+                             title LIKE lower($2) ESCAPE ''`
+            let result = await db.query(sqlQeuery, [user, search]);
             console.log(result.rows);
             if(result.rows.length > 0) {
                 notes = result.rows;

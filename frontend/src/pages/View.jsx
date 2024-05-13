@@ -2,6 +2,7 @@ import axios from "axios";
 import { Api } from "../apiConfig";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 
 function View() {
     const [note, setNote] = useState({});
@@ -34,10 +35,17 @@ function View() {
     }, [])
 
     return (
-        <div>
+        <div >
+            <Navbar/>
             <br />
-            <h2>{note.title}</h2>
-            <p>{note.content}</p>
+            <br />
+            <div style = {{display: 'flex', justifyContent: 'center'}}>
+                <div>
+                    <h2 style = {{color: 'white'}}>{note.title}</h2>
+                    <hr  style = {{color: 'white'}}/>
+                    <p style = {{color: 'white'}}>{note.content}</p>
+                </div>
+            </div>
         </div>
     )
 }

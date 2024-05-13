@@ -2,6 +2,7 @@ import axios from "axios";
 import { Api } from "../apiConfig";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 
 function Edit() {
     const [title, setTitle] = useState("");
@@ -65,13 +66,45 @@ function Edit() {
     }, [])
 
     return (
-        <div>
-            <input type="text" value = {title} onChange={(e) => setTitle(e.target.value)}/>
+        <div >
+        < Navbar/>
+        <div style={{}}>
+        <div style={{marginLeft: '5%', marginRight: '20%', marginTop: '2%', width: '80%'}}>
             <br />
-            <input type="text" value = {content} onChange={(e) => setContent(e.target.value)}/>
-            <button onClick = {handleUpdate}>Update</button>
-            <button onClick = {handleDelete}>Delete</button>
+            <br />
+        <div className="mb-3">
+                <label htmlFor="title" className="form-label" style={{color: 'white'}}>
+                    Title
+                </label>
+                <input
+                    type="text"
+                    className="form-control"
+                    id="title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    />
+            </div>
+            <div className="mb-3">
+                <label htmlFor="exampleFormControlTextarea1" className="form-label" style={{color: 'white'}}>
+                    Content
+                </label>
+                <textarea
+                    className="form-control"
+                    id="content"
+                    rows="4"
+                    value={content}
+                    onChange={(e)=> setContent(e.target.value)}
+            />
+            </div>
+            <br />
+            <div style={{textAlign: 'center'}}>
+                <button onClick = {handleUpdate} className="btn btn-primary">Update</button>
+                &nbsp; &nbsp; &nbsp;
+                <button onClick = {handleDelete} className="btn btn-primary">Delete</button> 
+            </div>
+        </div>       
         </div>
+    </div>
     )
 }
 

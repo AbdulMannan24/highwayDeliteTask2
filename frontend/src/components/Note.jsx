@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Api } from "../apiConfig";
-
+import './note.css';
+import deleteButton from '../assets/trash.svg';
 
 function Note({ NoteId, title, content, onDelete}) {
     const navigate = useNavigate();
@@ -35,13 +36,18 @@ function Note({ NoteId, title, content, onDelete}) {
     }
 
     return (
-        <div>
+        <div className="note-card">
             <h3>{title}</h3>
-            <p>{content}</p>
-            <button id= {title} onClick = {handleView}>view</button>
-            <button id= {NoteId} onClick = {handleEdit} >Edit</button>
-            <button id = {NoteId} onClick = {handleDelete} >Delete</button>
+            <p className="note-content">{content}</p>
+            <div className="buttons-container">
+                <button id="{title}" onClick={handleView}>View</button>
+                <button id="{NoteId}" onClick={handleEdit}>Edit</button>
+                <button id="{NoteId}" onClick={handleDelete}>
+                    <img src={deleteButton} alt="Delete" />
+                </button>
+            </div>
         </div>
+
     )
 }
 
