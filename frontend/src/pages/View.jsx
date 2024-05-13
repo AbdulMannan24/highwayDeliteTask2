@@ -11,7 +11,6 @@ function View() {
     async function getNote() {
         try {
             let token = 'Bearer ' + localStorage.getItem('token');
-            let link = Api + '/notes/' + title;
             let response = await axios.get(Api + '/notes/search/' + id, { 
                 headers: { authorization: token}
             })
