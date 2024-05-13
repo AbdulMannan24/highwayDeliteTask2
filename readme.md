@@ -5,6 +5,8 @@
 ### FrontEnd: React.js, Bootstrap5
 ### libraries: Check the package.json in respoctive directories
 
+## Database Design
+![Database Design](NotesDB.png)
 ## How to Install this App Locally ?
 * clone this repository
 ### FrontEnd 
