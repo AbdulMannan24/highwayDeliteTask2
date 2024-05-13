@@ -40,7 +40,7 @@ function Note({ NoteId, title, content, onDelete}) {
             <h3>{title}</h3>
             <p className="note-content">{content}</p>
             <div className="buttons-container">
-                <button id="{title}" onClick={handleView}>View</button>
+                <button id="{NoteId}" onClick={handleView}>View</button>
                 <button id="{NoteId}" onClick={handleEdit}>Edit</button>
                 <button id="{NoteId}" onClick={handleDelete}>
                     <img src={deleteButton} alt="Delete" />
