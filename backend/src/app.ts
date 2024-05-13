@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 dotenv.config();
 import { connectDB, db } from './db'
+const PORT = process.env.PORT || 3000;
 
 const app: express.Application = express();
 
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(3000,async () => {
+app.listen(PORT , async () => {
     console.log('listening on port 3000');
     try {
         await connectDB();     

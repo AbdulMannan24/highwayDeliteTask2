@@ -40,6 +40,7 @@ const dotenv = __importStar(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
 dotenv.config();
 const db_1 = require("./db");
+const PORT = process.env.PORT || 3000;
 const app = (0, express_1.default)();
 // middlewares
 app.use((0, cors_1.default)());
@@ -52,7 +53,7 @@ app.use('/notes', notes_1.default);
 app.get('/', (req, res) => {
     res.json({ message: "this is working" });
 });
-app.listen(3000, () => __awaiter(void 0, void 0, void 0, function* () {
+app.listen(PORT, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log('listening on port 3000');
     try {
         yield (0, db_1.connectDB)();
