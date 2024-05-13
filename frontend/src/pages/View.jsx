@@ -6,13 +6,13 @@ import Navbar from "../components/Navbar";
 
 function View() {
     const [note, setNote] = useState({});
-    const { title } = useParams();
+    const { id } = useParams();
 
     async function getNote() {
         try {
             let token = 'Bearer ' + localStorage.getItem('token');
             let link = Api + '/notes/' + title;
-            let response = await axios.get(Api + '/notes/' + title, { 
+            let response = await axios.get(Api + '/notes/search/' + id, { 
                 headers: { authorization: token}
             })
             if (response.data.message == 'success') {
