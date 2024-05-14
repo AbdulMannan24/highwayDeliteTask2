@@ -84,7 +84,7 @@ router.get('/resend/:email', async (req, res) => {
             return;
         } 
         let email: string = req.params.email;
-        let link: string = `http://localhost:5173/verify/${email}` 
+        let link: string = `https://highway-delite-task2.vercel.app/verify/${email}` 
         await sendEmail(email, link);
         res.json({message: "success"})
     } catch (err) {
